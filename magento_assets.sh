@@ -17,7 +17,7 @@ bundle show hem 2>&1 >/dev/null
 RESULT=$?
 set -e
 
-pushd tools/assets
+pushd tools/assets >/dev/null
   if [ ${RESULT} -gt 0 ]; then
     cat <<- EOF > Gemfile
     source "https://rubygems.org"
@@ -42,4 +42,4 @@ EOF
   done
 
   bundle exec hem magento initialize-vm
-popd
+popd >/dev/null
