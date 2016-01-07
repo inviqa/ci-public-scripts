@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 HEM_ASSET_ENV="${HEM_ASSET_ENV:-development}"
 HEM_RUN_ENV="${HEM_RUN_ENV:-local}"
 ASSET_DB_USER="${ASSET_DB_USER:-magento}"
