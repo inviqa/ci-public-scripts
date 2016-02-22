@@ -5,4 +5,4 @@ printf "sendmail_path = %s/bin/catchmail\nsmtp_port = 1025\n" "$(pwd)" >> "$HOME
 mkdir bin .gems
 gem install mailcatcher -v '~> 0.6.1' --no-rdoc --no-ri -i '.gems' -n 'bin'
 # Run mailcatcher
-bin/mailcatcher
+GEM_PATH="$GEM_PATH:$(pwd)/.gems/" bin/mailcatcher
