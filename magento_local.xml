@@ -1,0 +1,77 @@
+<config>
+    <global>
+        <environment><![CDATA[test]]></environment>
+        <install>
+            <date><![CDATA[Thu, 01 Jul 2010 10:29:20 +0000]]></date>
+        </install>
+        <crypt>
+            <key><![CDATA[{{crypt_key}}]]></key>
+        </crypt>
+        <disable_local_modules>false</disable_local_modules>
+        <resources>
+            <db>
+                <table_prefix><![CDATA[]]></table_prefix>
+            </db>
+            <core_write>
+                <connection>
+                    <use>default_write</use>
+                </connection>
+            </core_write>
+            <core_read>
+                <connection>
+                    <use>default_read</use>
+                </connection>
+            </core_read>
+            <default_setup>
+                <connection>
+                    <host><![CDATA[localhost]]></host>
+                    <username><![CDATA[magento]]></username>
+                    <password><![CDATA[magento]]></password>
+                    <dbname><![CDATA[magentodb]]></dbname>
+                    <persistent><![CDATA[false]]></persistent><!-- Persistent DB connection true / false / empty=false -->
+                    <active>1</active>
+                </connection>
+            </default_setup>
+            <default_read>
+                <connection>
+                    <host><![CDATA[localhost]]></host>
+                    <username><![CDATA[magento]]></username>
+                    <password><![CDATA[magento]]></password>
+                    <dbname><![CDATA[magentodb]]></dbname>
+                    <type><![CDATA[pdo_mysql]]></type>
+                    <persistent><![CDATA[false]]></persistent><!-- Persistent DB connection true / false / empty=false -->
+                    <active>1</active>
+                </connection>
+            </default_read>
+            <default_write>
+                <connection>
+                    <host><![CDATA[localhost]]></host>
+                    <username><![CDATA[magento]]></username>
+                    <password><![CDATA[magento]]></password>
+                    <dbname><![CDATA[magentodb]]></dbname>
+                    <type><![CDATA[pdo_mysql]]></type>
+                    <persistent><![CDATA[false]]></persistent><!-- Persistent DB connection true / false / empty=false -->
+                    <active>1</active>
+                </connection>
+            </default_write>
+        </resources>
+        <session_save><![CDATA[db]]></session_save>
+        <session_cache_limiter><![CDATA[nocache]]></session_cache_limiter><!-- see http://php.net/manual/en/function.session-cache-limiter.php#82174 for possible values -->
+        <cache>
+            <backend></backend><!-- apc / memcached / xcache / Cm_Cache_Backend_Redis empty=file -->
+        </cache>
+
+        <full_page_cache>
+            <backend></backend><!-- apc / memcached / xcache / Cm_Cache_Backend_Redis empty=file -->
+        </full_page_cache>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <frontName><![CDATA[admin]]></frontName>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>
