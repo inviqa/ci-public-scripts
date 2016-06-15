@@ -22,7 +22,7 @@ pushd tools/assets >/dev/null
     cat <<- EOF > Gemfile
     source "https://rubygems.org"
 
-    gem 'hem'
+    gem 'hem', '= 1.0.1.beta6'
 EOF
     rm Gemfile.lock 2>/dev/null || true
     bundle install --path .gems
