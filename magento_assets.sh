@@ -10,7 +10,7 @@ set -e
 
 mkdir -p tools/assets
 
-# Install hem as a gem in tools/assets if it's not already available in the
+# Uninstall hem as a gem if it's in the project Gemfile
 # project Gemfile
 set +e
 bundle show hem 2>&1 >/dev/null
@@ -18,22 +18,21 @@ RESULT=$?
 set -e
 
 pushd tools/assets >/dev/null
-  if [ ${RESULT} -gt 0 ]; then
-    cat <<- EOF > Gemfile
-    source "https://rubygems.org"
-
-    gem 'hem', '= 1.0.1.beta6'
-EOF
-    rm Gemfile.lock 2>/dev/null || true
-    bundle install --path .gems
+  if [ ${RESULT} -eq 0 ]; then
+    gem uninstall hem --all --executables --force
   fi
 
+  wget -qO - https://dx6pc3giz7k1r.cloudfront.net/GPG-KEY-inviqa-tools | sudo apt-key add -
+  echo "deb https://dx6pc3giz7k1r.cloudfront.net/repos/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/inviqa-tools.list
+  sudo apt-get update
+  sudo apt-get install hem
+
   # requires AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY env variables to be present:
-  bundle exec hem --non-interactive assets download "--env=${HEM_ASSET_ENV}"
+  hem --non-interactive assets download "--env=${HEM_ASSET_ENV}"
 
   echo 'Importing database'
 
-  bundle exec hem assets apply --force "--env=${HEM_ASSET_ENV}" $*
+  hem assets apply --force "--env=${HEM_ASSET_ENV}" $*
 
   for DB_ASSET in $(find "${HEM_ASSET_ENV}" -name '*.sql.gz'); 
   do
@@ -41,5 +40,5 @@ EOF
     echo "GRANT ALL ON ${DB_NAME}.* to '${ASSET_DB_USER}'@'%' IDENTIFIED BY '${ASSET_DB_PASSWORD}'" |  mysql -uroot
   done
 
-  bundle exec hem magento initialize-vm
+  hem magento initialize-vm
 popd >/dev/null
