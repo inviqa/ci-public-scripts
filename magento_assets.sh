@@ -22,10 +22,8 @@ pushd tools/assets >/dev/null
     gem uninstall hem --all --executables --force
   fi
 
-  wget -qO - https://dx6pc3giz7k1r.cloudfront.net/GPG-KEY-inviqa-tools | sudo apt-key add -
-  echo "deb https://dx6pc3giz7k1r.cloudfront.net/repos/ubuntu trusty main" | sudo tee /etc/apt/sources.list.d/inviqa-tools.list
-  sudo apt-get update
-  sudo apt-get install hem
+  wget -nc https://dx6pc3giz7k1r.cloudfront.net/repos/ubuntu/pool/main/h/hem/hem_1.2.4-1_amd64.deb
+  sudo dpkg -i hem_1.2.4-1_amd64.deb
 
   # requires AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY env variables to be present:
   hem --non-interactive assets download "--env=${HEM_ASSET_ENV}"
