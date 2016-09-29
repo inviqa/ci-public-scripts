@@ -3,6 +3,7 @@ HEM_ASSET_ENV="${HEM_ASSET_ENV:-development}"
 HEM_RUN_ENV="${HEM_RUN_ENV:-local}"
 ASSET_DB_USER="${ASSET_DB_USER:-magento}"
 ASSET_DB_PASSWORD="${ASSET_DB_PASSWORD:-magento}"
+HEM_VERSION="${HEM_VERSION:-1.2.4-1}"
 
 export HEM_RUN_ENV
 
@@ -23,8 +24,8 @@ pushd tools/assets >/dev/null
     gem uninstall hem --all --executables --force
   fi
 
-  wget -nc https://dx6pc3giz7k1r.cloudfront.net/repos/ubuntu/pool/main/h/hem/hem_1.2.4-1_amd64.deb
-  sudo dpkg -i hem_1.2.4-1_amd64.deb
+  wget -nc "https://dx6pc3giz7k1r.cloudfront.net/repos/ubuntu/pool/main/h/hem/hem_${HEM_VERSION}_amd64.deb"
+  sudo dpkg -i "hem_${HEM_VERSION}_amd64.deb"
 
   # requires AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY env variables to be present:
   hem --non-interactive assets download "--env=${HEM_ASSET_ENV}"
