@@ -7,6 +7,7 @@ ASSET_DB_PASSWORD="${ASSET_DB_PASSWORD:-magento}"
 export HEM_RUN_ENV
 
 set -e
+set -x
 
 mkdir -p tools/assets
 
